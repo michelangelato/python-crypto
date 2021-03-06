@@ -8,7 +8,8 @@ from Crypto.Cipher import AES
 import binascii
 
 def generate_nonce():
-    return secrets.token_hex(16)
+    nonce = secrets.token_urlsafe(16)[0:16]
+    return nonce
 
 def encrypt(plaintext, iv, key):
     print('\n-- ENCRYPT')
