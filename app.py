@@ -1,15 +1,14 @@
 # mac os module fix
 import crypto
+import secrets
 import sys
 sys.modules['Crypto'] = crypto
-
 from Crypto import Random
 from Crypto.Cipher import AES
 import binascii
 
-def get_16byte():
-    random = Random.new()
-    return random.read(16)
+def generate_nonce():
+    return secrets.token_hex(16)
 
 def encrypt(plaintext, iv, key):
     print('\n-- ENCRYPT')
@@ -78,10 +77,15 @@ def decrypt(cipher, iv, key):
     return plaintext
 
 print('\nAES CBC 128 padding PKCS7')
-message = input('message: ')
+
+print('\nnonce1:\t' + str(generate_nonce()))
+print('nonce2:\t' + str(generate_nonce()))
+print('nonce3:\t' + str(generate_nonce()))
+
+message = input('\ninput message: ')
 
 iv = '7d0168a2a49bdd51'     # initial vector static
-key = 'UwXYLkqxKHArvxxx'    # kcs
+key = 'UwXYLkqxKHArvxxy'    # kcs
 print('iv:\t\t' + iv)
 print('key:\t\t' + key)
 
