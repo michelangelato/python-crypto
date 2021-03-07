@@ -1,8 +1,10 @@
 # mac os module fix
 import crypto
-import secrets
 import sys
 sys.modules['Crypto'] = crypto
+
+# imports
+import secrets
 from Crypto import Random
 from Crypto.Cipher import AES
 import binascii
